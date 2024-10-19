@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  drupal:
+    build: ./drupal
+    container_name: drupal
+    ports:
+      - "8080:80"
+    volumes:
+      - ./web:/var/www/html
+      - ./config/sync:/var/www/html/sites/default/config/sync
+      - ./config.tar.gz:/config.tar.gz  # Arquivo de configuração na raiz do contêiner
+    environment:
+      - DRUPAL_DB_HOST=db
+      - DRUPAL_DB_NAME=drupal
+      - DRUPAL_DB_USER=drupal
+      - DRUPAL_DB_PASSWORD=drupal
+    depends_on:
+      - db
+
+  db:
+    image: mariadb:latest
+    container_name: drupal_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: drupal
+      MYSQL_USER: drupal
+      MYSQL_PASSWORD: drupal
+    volumes:
+      - ./db-data:/var/lib/mysql
+    ports:
+      - "3306:3306"

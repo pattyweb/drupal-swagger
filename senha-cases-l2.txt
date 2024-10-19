@@ -1,0 +1,21 @@
+http://localhost:8080/user/login
+Admin
+CasesTesteL2@
+
+Módulos para API
+OpenAPI
+OpenAPI UI
+ReDoc for OpenAPI UI
+JSON:API
+Schemata
+Schemata in JSON Schema
+OpenAPI JSON:API
+
+
+Para o API
+GET http://localhost:8080/jsonapi/node/case
+http://localhost:8080/openapi/jsonapi
+
+openapi/jsonapi?_format=json
+
+$settings['cache']['default'] = 'cache.backend.apcu';
