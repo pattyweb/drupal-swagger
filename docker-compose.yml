@@ -1,8 +1,10 @@
-version: '3'
+volumes:
+  redis-cache:  # Volume para persistir o cache do Redis
+  db-data:  # Volume para persistir os dados do banco de dados
 
 services:
   drupal:
-    build: ./drupal
+    build: ./  # Use o Dockerfile local
     container_name: drupal
     ports:
       - "8080:80"
@@ -17,6 +19,7 @@ services:
       - DRUPAL_DB_PASSWORD=drupal
     depends_on:
       - db
+      - redis  # Adiciona dependência do Redis
 
   db:
     image: mariadb:latest
@@ -30,3 +33,12 @@ services:
       - ./db-data:/var/lib/mysql
     ports:
       - "3306:3306"
+
+  redis:
+    image: redis:6.2.7
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-cache:/data:delegated
