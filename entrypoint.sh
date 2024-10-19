@@ -12,7 +12,7 @@ done
 # Restaurar o banco de dados do dump
 if [ -f /db-dump.sql ]; then
   echo "Restaurando o banco de dados..."
-  mysql -h db -u drupal -pdrupal drupal < /db-dump.sql
+  mysql --binary-mode=1 -h db -u drupal -pdrupal drupal < /db-dump.sql
   echo "Banco de dados restaurado."
 else
   echo "Dump do banco de dados não encontrado, pulando restauração..."
