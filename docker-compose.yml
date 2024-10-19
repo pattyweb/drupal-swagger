@@ -10,8 +10,7 @@ services:
       - "8080:80"
     volumes:
           - ./web:/var/www/html
-          - ./web/sites/default/config/sync:/var/www/html/sites/default/config/sync
-          - ./web/sites/default/config/sync/config-site.tar.gz:/config-site.tar.gz  # Montando o arquivo de configuração
+          - ./config/sync:/var/www/html/sites/default/config/sync
     environment:
       - DRUPAL_DB_HOST=db
       - DRUPAL_DB_NAME=drupal
@@ -20,7 +19,6 @@ services:
     depends_on:
       - db
       - redis  # Adiciona dependência do Redis
-    entrypoint: /usr/local/bin/entrypoint.sh  # Adiciona o script de inicialização
 
   db:
     image: mariadb:latest
