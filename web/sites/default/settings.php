@@ -886,7 +886,6 @@ $databases['default']['default'] = array (
 $settings['config_sync_directory'] = 'sites/default/files/config_9bPSyWRY6-edoFD12ZF0KPgKvHQwPqbr3Mp4otAN6G8lJtWa6m9HIA-ZGzecD5JolZB2C7reow/sync';
 
 $settings['cache']['default'] = 'cache.backend.redis';
-$settings['cache_prefix'] = 'drupal_';
 $settings['redis.connection']['host'] = 'redis';  // Nome do contêiner Redis
 $settings['redis.connection']['port'] = 6379;
 $settings['redis.connection']['interface'] = 'PhpRedis'; // Interface PHP Redis
@@ -896,5 +895,6 @@ $settings['cache_tags_invalidation']['backend'] = 'cache.backend.redis';
 
 // Opcionalmente, você pode definir o backend de cache de fábrica
 $settings['container_yamls'][] = 'modules/contrib/redis/example.services.yml';
+
 
 
