@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y libz-dev libpq-dev \
 COPY ./entrypoint.sh /usr/local/bin/entrypoint.sh
 
 # Copie o arquivo do dump do banco de dados
-COPY ./db-dump.sql /db-dump.sql
+COPY ./web/sites/default/config/sync/db-dump.sql /db-dump.sql
 
 # Dê permissão de execução ao script
 RUN chmod +x /usr/local/bin/entrypoint.sh
