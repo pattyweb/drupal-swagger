@@ -9,8 +9,9 @@ services:
     ports:
       - "8080:80"
     volumes:
-          - ./web:/var/www/html
-          - ./config/sync:/var/www/html/sites/default/config/sync
+      - ./web:/var/www/html
+      - ./config-site.tar.gz:/config-site.tar.gz  # Mount config-site.tar.gz from root
+      - ./db-dump.sql:/db-dump.sql  # Mount db-dump.sql from root
     environment:
       - DRUPAL_DB_HOST=db
       - DRUPAL_DB_NAME=drupal
