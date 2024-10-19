@@ -1,47 +1,28 @@
 #!/bin/bash
 
-# Caminho onde o arquivo de configuração exportado está armazenado (na raiz da aplicação)
-CONFIG_ARCHIVE="/config.tar.gz"
+# Verifica se o banco de dados já foi populado
+if ! drush sql-query "SHOW TABLES;" | grep -q "users"; then
+  echo "Restaurando o banco de dados..."
+  # Restaura o dump do banco de dados
+  if [ -f /db-dump.sql ]; then
+    drush sql-cli < /db-dump.sql
+    echo "Banco de dados restaurado."
+  fi
 
-# Verificar se o arquivo de configuração existe
-if [ -f "$CONFIG_ARCHIVE" ]; then
-  echo "Arquivo de configuração encontrado: $CONFIG_ARCHIVE"
+  echo "Extraindo as configurações exportadas..."
+  # Extrai as configurações exportadas
+  tar -xzf /config-site.tar.gz -C /var/www/html/sites/default/config/sync
+  echo "Configurações extraídas."
 
-  # Extrair o arquivo de configuração para o diretório de sincronização do Drupal
-  tar -xzf $CONFIG_ARCHIVE -C /var/www/html/sites/default/config/sync/
-
-  echo "Configurações extraídas com sucesso."
-
-  # Aguarde até que o banco de dados esteja pronto
-  until mysql -h $DRUPAL_DB_HOST -u $DRUPAL_DB_USER -p$DRUPAL_DB_PASSWORD $DRUPAL_DB_NAME; do
-    echo "Esperando pelo banco de dados..."
-    sleep 3
-  done
-
-  # Importar as configurações do Drupal
-  cd /var/www/html/web
-  php core/scripts/drupal quick-start --no-interaction
-
-  # Importar configurações usando API do Drupal
-  php -r "
-  use Drupal\Core\DrupalKernel;
-  use Symfony\Component\HttpFoundation\Request;
-
-  require_once 'autoload.php';
-  $autoloader = require_once 'autoload.php';
-  $request = Request::createFromGlobals();
-  $kernel = DrupalKernel::createFromRequest($request, $autoloader, 'prod');
-  $kernel->boot();
-
-  // Importar configurações
-  \$configImporter = \Drupal::service('config.manager')->getImporter();
-  \$configImporter->import();
-  echo 'Configurações importadas com sucesso.';
-  "
-
+  echo "Importando configurações sincronizadas..."
+  drush cim sync -y
+  echo "Configurações importadas."
 else
-  echo "Nenhum arquivo de configuração encontrado em $CONFIG_ARCHIVE"
+  echo "Banco de dados já populado. Pulando restauração."
 fi
 
-# Iniciar o Apache (ou outro servidor web)
-apache2-foreground
+# Limpa o cache do Drupal
+drush cr
+
+# Inicia o Apache (mantém o container rodando)
+exec apache2-foreground
