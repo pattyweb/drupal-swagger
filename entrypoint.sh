@@ -1,28 +1,31 @@
 #!/bin/bash
 
-# Verifica se o banco de dados já foi populado
-if ! drush sql-query "SHOW TABLES;" | grep -q "users"; then
+# Iniciar o Apache em segundo plano
+apache2-foreground &
+
+# Esperar o banco de dados estar pronto antes de proceder
+until mysql -h db -u drupal -pdrupal -e 'SELECT 1'; do
+  echo "Aguardando o banco de dados..."
+  sleep 5
+done
+
+# Restaurar o banco de dados do dump
+if [ -f /db-dump.sql ]; then
   echo "Restaurando o banco de dados..."
-  # Restaura o dump do banco de dados
-  if [ -f /db-dump.sql ]; then
-    drush sql-cli < /db-dump.sql
-    echo "Banco de dados restaurado."
-  fi
-
-  echo "Extraindo as configurações exportadas..."
-  # Extrai as configurações exportadas
-  tar -xzf /config-site.tar.gz -C /var/www/html/sites/default/config/sync
-  echo "Configurações extraídas."
-
-  echo "Importando configurações sincronizadas..."
-  drush cim sync -y
-  echo "Configurações importadas."
+  mysql -h db -u drupal -pdrupal drupal < /db-dump.sql
+  echo "Banco de dados restaurado."
 else
-  echo "Banco de dados já populado. Pulando restauração."
+  echo "Dump do banco de dados não encontrado, pulando restauração..."
 fi
 
-# Limpa o cache do Drupal
-drush cr
+# Extração de configurações exportadas
+if [ -f /config-site.tar.gz ]; then
+  echo "Extraindo as configurações exportadas..."
+  tar -xzvf /config-site.tar.gz -C /var/www/html/sites/default/config/sync
+  echo "Configurações extraídas."
+else
+  echo "Arquivo de configurações não encontrado, pulando extração..."
+fi
 
-# Inicia o Apache (mantém o container rodando)
-exec apache2-foreground
+# Fim do script, Apache já está rodando em segundo plano
+wait -n

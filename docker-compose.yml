@@ -11,7 +11,7 @@ services:
     volumes:
           - ./web:/var/www/html
           - ./web/sites/default/config/sync:/var/www/html/sites/default/config/sync
-          - ./config-site.tar.gz:/config-site.tar.gz  # Montando o arquivo de configuração
+          - ./web/sites/default/config/sync/config-site.tar.gz:/config-site.tar.gz  # Montando o arquivo de configuração
     environment:
       - DRUPAL_DB_HOST=db
       - DRUPAL_DB_NAME=drupal
