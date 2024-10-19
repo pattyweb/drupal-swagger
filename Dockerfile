@@ -6,6 +6,9 @@ RUN apt-get update && apt-get install -y libz-dev libpq-dev \
     && pecl install redis \
     && docker-php-ext-enable redis
 
+# Instalar o cliente MySQL para interagir com o banco de dados
+RUN apt-get install -y default-mysql-client
+
 # Copie o script de inicialização para o contêiner
 COPY ./entrypoint.sh /usr/local/bin/entrypoint.sh
 
