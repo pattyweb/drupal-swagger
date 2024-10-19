@@ -9,10 +9,8 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ./web:/var/www/html
-      - ./web/sites/default/config/sync:/var/www/html/sites/default/config/sync
-      - ./web/sites/default/config/sync/config-site.tar.gz:/config-site.tar.gz
-      - ./web/sites/default/config/sync/db-dump.sql:/db-dump.sql
+          - ./web:/var/www/html
+          - ./config/sync:/var/www/html/sites/default/config/sync
     environment:
       - DRUPAL_DB_HOST=db
       - DRUPAL_DB_NAME=drupal
