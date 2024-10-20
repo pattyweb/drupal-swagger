@@ -50,3 +50,16 @@ Thumbs.db
 node_modules
 npm-debug.log
 yarn-error.log
+
+# --- Custom rules for /web/sites/default/files ---
+# Ignore everything in /web/sites/default/files
+/web/sites/default/files/*
+
+# Allow image files to be tracked
+!/web/sites/default/files/**/*.jpg
+!/web/sites/default/files/**/*.jpeg
+!/web/sites/default/files/**/*.png
+!/web/sites/default/files/**/*.gif
+
+# Allow the files directory itself to be tracked
+!/web/sites/default/files/
