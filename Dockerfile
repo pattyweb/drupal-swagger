@@ -1,6 +1,5 @@
 # Use a imagem oficial do Drupal como base
 FROM drupal:latest
-
 # Install Redis and the MySQL client
 RUN apt-get update && apt-get install -y libz-dev libpq-dev default-mysql-client \
     && pecl install redis \
