@@ -60,6 +60,11 @@ AddEncoding gzip svgz
 <IfModule mod_rewrite.c>
   RewriteEngine on
 
+  # Restrict access to the /jsonapi/ endpoints for non-logged-in users
+  RewriteCond %{REQUEST_URI} ^/jsonapi/ [NC]
+  RewriteCond %{HTTP_COOKIE} !^.*SESS.*$ [NC]
+  RewriteRule ^ - [F]
+
   # Set "protossl" to "s" if we were accessed via https://.  This is used later
   # if you enable "www." stripping or enforcement, in order to ensure that
   # you don't bounce between http and https.
