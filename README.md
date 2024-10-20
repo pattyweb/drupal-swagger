@@ -62,17 +62,15 @@ Para gerar e explorar a documentação da API dos **cases** usando **Swagger**, 
 1. No painel administrativo do Drupal, vá até **Configurações** > **openAPI**.
 2. Clique em **Explore with Redoc** para visualizar a documentação dos endpoints.
 
-O endpoint para acessar a API dos **cases** é:
+O endpoint para acessar a API dos **swagger** é:
 
-- **Endpoint API dos Cases**: [[http://localhost:8080/jsonapi/node/case](http://localhost:8080/openapi/jsonapi)]
-
-Esse endpoint retorna os **cases** em formato JSON, ideal para consumo por outras aplicações.
+- **Endpoint API Swagger**: http://localhost:8080/openapi/jsonapi
 
 ## 5. Segurança na Autenticação da API
 
 A API está protegida por **HTTP Basic Authentication**. Para acessar os endpoints da API, é necessário estar logado com um usuário válido. Aqui está o fluxo básico de autenticação:
 
-1. Ao tentar acessar qualquer endpoint da API, como `http://localhost:8080/jsonapi/node/case`, o sistema solicitará suas credenciais.
+1. Ao tentar acessar qualquer endpoint da API, como `[http://localhost:8080/jsonapi/node/case](http://localhost:8080/openapi/jsonapi)`, o sistema avisará que não há permissão.
 2. Forneça o **usuário** e **senha** cadastrados no sistema Drupal para autenticação.
 
 Isso garante que somente usuários autenticados possam acessar os dados expostos pela API.
