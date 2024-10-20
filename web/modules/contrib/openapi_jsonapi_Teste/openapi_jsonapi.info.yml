@@ -1,0 +1,9 @@
+name: OpenAPI JSON:API
+description: OpenAPI support for the JSON:API module.
+type: module
+package: Web Services
+core_version_requirement: ^10 || ^11
+dependencies:
+  - openapi:openapi
+  - schemata:schemata
+  - schemata:schemata_json_schema
