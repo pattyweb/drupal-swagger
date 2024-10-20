@@ -1,6 +1,5 @@
-# Use the Drupal 11.0 image with PHP 8.3 and Apache
-FROM drupal:11.0-php8.3-apache
-
+# Use a imagem oficial do Drupal como base
+FROM drupal:latest
 # Install Redis and the MySQL client
 RUN apt-get update && apt-get install -y libz-dev libpq-dev default-mysql-client \
     && pecl install redis \
