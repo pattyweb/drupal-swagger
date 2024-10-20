@@ -64,7 +64,7 @@ Para gerar e explorar a documentação da API dos **cases** usando **Swagger**, 
 
 O endpoint para acessar a API dos **cases** é:
 
-- **Endpoint API dos Cases**: [http://localhost:8080/jsonapi/node/case](http://localhost:8080/jsonapi/node/case)
+- **Endpoint API dos Cases**: [[http://localhost:8080/jsonapi/node/case](http://localhost:8080/openapi/jsonapi)]
 
 Esse endpoint retorna os **cases** em formato JSON, ideal para consumo por outras aplicações.
 
