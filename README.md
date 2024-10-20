@@ -84,7 +84,8 @@ O Redis é utilizado como sistema de cache para melhorar o desempenho da aplica�
 ### Configuração Básica do Redis
 
 1. O Redis está habilitado e configurado para funcionar como backend de cache do Drupal.
-2. A configuração está definida no arquivo `settings.php` como segue:
+2. No menu superior, navegue até **Gerenciar** > **Relatórios** > **Redis** , para ver respectivas configurações e relatório.
+3. A configuração está definida no arquivo `settings.php` como segue:
 
 ```php
 $settings['redis.connection']['interface'] = 'PhpRedis';
