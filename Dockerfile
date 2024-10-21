@@ -1,5 +1,6 @@
 # Use a imagem oficial do Drupal como base
 FROM drupal:latest
+
 # Install Redis and the MySQL client
 RUN apt-get update && apt-get install -y libz-dev libpq-dev default-mysql-client \
     && pecl install redis \
@@ -11,8 +12,8 @@ COPY ./entrypoint.sh /usr/local/bin/entrypoint.sh
 # Dê permissão de execução ao script
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
-# Set ownership for the 'files' directory to www-data user
-RUN chown -R www-data:www-data /var/www/html/sites/default/files
+# Ensure 'files' directory exists and set ownership for the 'files' directory to www-data user
+RUN mkdir -p /var/www/html/sites/default/files && chown -R www-data:www-data /var/www/html/sites/default/files
 
 # Expor a porta padrão do Apache
 EXPOSE 80
