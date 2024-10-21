@@ -902,5 +902,12 @@ $settings['cache_tags_invalidation']['backend'] = 'cache.backend.redis';
 // Opcionalmente, você pode definir o backend de cache de fábrica
 $settings['container_yamls'][] = __DIR__ . '/../modules/contrib/redis/redis.services.yml';
 
+$settings['file_public_path'] = 'sites/default/files';
+$settings['file_public_base_url'] = 'http://localhost:8080/sites/default/files';
+$settings['file_assets_path'] = 'sites/default/files';
+$settings['file_private_path'] = 'sites/default/private';
+$settings['file_temp_path'] = '/tmp';
 
+
+ini_set('memory_limit', '256M');
 
