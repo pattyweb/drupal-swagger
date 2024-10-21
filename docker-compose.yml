@@ -8,7 +8,6 @@ services:
     container_name: drupal
     ports:
       - "8080:80"
-    user: www-data
     volumes:
       - ./web:/var/www/html
       - ./config-site.tar.gz:/config-site.tar.gz  # Mount config-site.tar.gz from root
