@@ -13,6 +13,7 @@ Thumbs.db
 /composer.lock
 
 # Ignorar arquivos de cache do Drupal
+/web/sites/default/files
 /web/sites/default/private
 /web/sites/default/tmp
 /web/sites/default/settings.php       # Ignorar configurações específicas do site
@@ -20,9 +21,16 @@ Thumbs.db
 /web/sites/default/services.yml       # Arquivo de configuração de serviços
 
 # Configuração automática do Drupal
+/web/sites/default/files
 /web/sites/default/private
 /web/sites/default/files/translations
 
+# Cache, logs e arquivos temporários
+/web/sites/*/files/styles
+/web/sites/*/files/tmp
+/web/sites/*/files/php
+/web/sites/*/files/js
+/web/sites/*/files/css
 
 # Arquivos exportados do Drupal (configurações geradas no runtime)
 /web/sites/default/config_*
@@ -42,3 +50,10 @@ Thumbs.db
 node_modules
 npm-debug.log
 yarn-error.log
+
+# --- Custom rules for /web/sites/default/files ---
+# Ignore everything in /web/sites/default/files
+/web/sites/default/files/*
+
+# Allow image files to be tracked
+!/web/sites/default/files/2024-10/*.jpg
