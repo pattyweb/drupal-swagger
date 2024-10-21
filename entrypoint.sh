@@ -38,6 +38,7 @@ fi
 
 # Alterar permissões da pasta
 chown -R www-data:www-data /var/www/html/sites/default/config/sync
+chown -R www-data:www-data /var/www/html/sites/default/files
 
 # Iniciar o Apache
 echo "Iniciando Apache..."
