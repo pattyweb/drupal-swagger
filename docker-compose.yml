@@ -22,7 +22,7 @@ services:
       - redis  # Adiciona dependência do Redis
 
   db:
-    image: mariadb:latest
+    image: mariadb:11.4
     container_name: drupal_db
     environment:
       MYSQL_ROOT_PASSWORD: root
